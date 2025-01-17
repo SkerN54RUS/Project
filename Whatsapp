@@ -1,0 +1,76 @@
+import os
+from datetime import datetime
+
+def wa(name,data_assignment,organization_name,amount):
+    """Вывод итога на печать."""
+    discount = amount * 0.85
+    sum_diccount = amount - discount
+
+    """Вывод сообщения."""
+    messege = (
+        f'======================================================================\n\n'
+        f'Здравствуйте, {name}.\n'
+        f'Вас беспокоит - ООО ПКО "Русинтерколлект", мы являемся коллекторским агентством и хотим предложить '
+        f'индивидуальные решения по Вашей задолженности\n'
+        f'Наш сайт: https://koala-c.ru/\n'
+        f'Наш телефон: +7 (499) 322 0454\n'
+        f'Ваш менеджер: Александр id4001\n\n'
+        f'======================================================================\n\n'
+        f'Дeлo в тoм чтo {data_assignment} cocтoялacь уcтупкa прaв трeбoвaния пo Вaшeму зaйму из {organization_name}.'
+        f'Хoтeли бы пoмoчь и прeдлoжить cкидку для Bac, пoнимaeм чтo c прeдыдущим крeдитoрoм cкoрee всeгo пoпрocту нe нaшли oбщeгo языкa.\n\n'
+        f'Cуммa зaдoлжeннocти сoстaвляeт: {amount:.2f} рублей, у Вac eсть вoзмoжнoсть сэкoнoмить и зaкрыть зaeм зa {discount:.2f} рублeй, сэкoнoмив {sum_diccount:.2f} рублей. '
+        f'K сoжaлeнию, дaнное предлoжeние oграничeнo пo врeмeни, тeм нe мeнee мы гoтoвы oбcудить cрoки. '
+        f'Ввиду тoгo чтo кoмпaния гoтoвa направить документы в суд, предложение является досудебным. После суда сумма будет без скидки + судебные издержки.\n\n'
+        f'Утoчните, пoжaлуйстa, гoтoвы вoспользoвaться cкидкoй и решить свой вопрос с задолженностью?\n\n'
+        f'======================================================================'
+    )
+    return messege
+
+def reset():
+    global count
+    count = 0
+
+def subtraction():
+    global count
+    count -= 1
+
+def add():
+    global count
+    count += 1
+
+count = 0
+
+def main():
+    """Основная функция программы.""" 
+    global count
+
+    while True:
+        today = datetime.now()
+        print(datetime.date(today))
+        name = input('Введите имя клиента:')
+        if name.lower() == 'reset':
+            reset()
+            print('Счетчик сброшен')
+            main()
+        elif name.lower() == 'отнимаем':
+            subtraction()
+            print('Счетчик -1')
+            main()
+        elif name.lower() == 'прибавляем':
+            add()
+            print('Счетчик +1')
+            main()
+
+        data_assignment = input('Введите дату цессии:')
+        organization_name = input('Введите наименование организации:')
+        amount = float(input('Введите итоговую сумму:'))
+        print(wa(name, data_assignment, organization_name, amount))
+        global count
+        count +=1
+        print(count)
+        space = input('Для очистки нажмите клавишу "Enter".')
+        os.system('cls')
+
+
+if __name__ == "__main__":
+    main()
