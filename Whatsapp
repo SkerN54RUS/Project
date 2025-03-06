@@ -1,76 +1,245 @@
-import os
+from random import choice, random
 from datetime import datetime
+import os
 
-def wa(name,data_assignment,organization_name,amount):
-    """Вывод итога на печать."""
-    discount = amount * 0.85
-    sum_diccount = amount - discount
 
-    """Вывод сообщения."""
-    messege = (
-        f'======================================================================\n\n'
-        f'Здравствуйте, {name}.\n'
-        f'Вас беспокоит - ООО ПКО "Русинтерколлект", мы являемся коллекторским агентством и хотим предложить '
-        f'индивидуальные решения по Вашей задолженности\n'
-        f'Наш сайт: https://koala-c.ru/\n'
-        f'Наш телефон: +7 (499) 322 0454\n'
-        f'Ваш менеджер: Александр id4001\n\n'
-        f'======================================================================\n\n'
-        f'Дeлo в тoм чтo {data_assignment} cocтoялacь уcтупкa прaв трeбoвaния пo Вaшeму зaйму из {organization_name}.'
-        f'Хoтeли бы пoмoчь и прeдлoжить cкидку для Bac, пoнимaeм чтo c прeдыдущим крeдитoрoм cкoрee всeгo пoпрocту нe нaшли oбщeгo языкa.\n\n'
-        f'Cуммa зaдoлжeннocти сoстaвляeт: {amount:.2f} рублей, у Вac eсть вoзмoжнoсть сэкoнoмить и зaкрыть зaeм зa {discount:.2f} рублeй, сэкoнoмив {sum_diccount:.2f} рублей. '
-        f'K сoжaлeнию, дaнное предлoжeние oграничeнo пo врeмeни, тeм нe мeнee мы гoтoвы oбcудить cрoки. '
-        f'Ввиду тoгo чтo кoмпaния гoтoвa направить документы в суд, предложение является досудебным. После суда сумма будет без скидки + судебные издержки.\n\n'
-        f'Утoчните, пoжaлуйстa, гoтoвы вoспользoвaться cкидкoй и решить свой вопрос с задолженностью?\n\n'
-        f'======================================================================'
-    )
-    return messege
+class Text:
+    """Шаблоны."""
 
-def reset():
-    global count
-    count = 0
+    @staticmethod
+    def first(data_assignment, organization_name, amount, discount, sum_discount):
+        """1 текст."""
+        return (
+            f"1.=============================================================\n"
+            f'Я являюсь вашим персональным менеджером, и хочу сообщить, о тoм чтo '
+            f"{data_assignment} cocтoялacь уcтупкa прaв трeбoвaния "
+            f"пo Вaшeму зaйму из {organization_name}."
+            f"Хoтeли бы пoмoчь и прeдлoжить cкидку для Bac, "
+            f"пoнимaeм чтo c прeдыдущим крeдитoрoм cкoрee всeгo "
+            f"нe нaшли oбщeгo языкa.\n\n"
+            f"Cуммa зaдoлжeннocти сoстaвляeт: {amount} рублей,"
+            f"у Вac eсть вoзмoжнoсть сэкoнoмить и зaкрыть зaeм зa {discount:.0f} "
+            f"рублeй, сэкoнoмив {sum_discount:.0f} рублей. "
+            f"K сoжaлeнию, дaнное предлoжeние oграничeнo пo врeмeни, так же мы, "
+            f"гoтoвы oбcудить cрoки. "
+            f"Ввиду тoгo чтo кoмпaния гoтoвa направить документы в суд, "
+            f"предложение является досудебным. "
+            f"После суда сумма будет без скидки + судебные издержки.\n\n"
+            f"Утoчните, пoжaлуйстa, гoтoвы вoспользoвaться cкидкoй и решить "
+            f"вопрос с задолженностью?\n"
+            f"============================================================="
+        )
 
-def subtraction():
-    global count
-    count -= 1
+    @staticmethod
+    def second(data_assignment, organization_name, amount, discount, sum_discount):
+        """2 текст."""    
+        return (
+            f"2.=============================================================\n"
+            f"Дeлo в тoм чтo {data_assignment} cocтoялacь переуcтупкa прaв"
+            f" трeбoвaния пo Вaшeму зaйму из {organization_name}."
+            f"Хoтeли бы пoмoчь и прeдлoжить cкидку для Bac, "
+            f"пoнимaeм чтo c прeдыдущим крeдитoрoм cкoрee всeгo "
+            f"нe нaшли oбщeгo языкa.\n\n"
+            f"Cуммa зaдoлжeннocти сoстaвляeт: {amount} рублей,"
+            f"у Вac eсть вoзмoжнoсть зaкрыть зaeм зa {discount:.0f} "
+            f"рублeй, сэкoнoмив {sum_discount:.0f} рублей. "
+            f"K сoжaлeнию, дaнное предлoжeние oграничeнo пo врeмeни, но "
+            f"гoтoвы oбcудить cрoки. "
+            f"Ввиду тoгo чтo кoмпaния гoтoвa направить документы в суд, "
+            f"предложение является досудебным. "
+            f"После суда сумма будет без скидки + судебные издержки.\n\n"
+            f"Вoспользуетесь cкидкoй и решите данный вопрос?"
+            f"вопрос с задолженностью?\n"
+            f"============================================================="
+        )
 
-def add():
-    global count
-    count += 1
+    @staticmethod
+    def third(data_assignment, organization_name, amount, discount, sum_discount):
+        """3 текст."""
+        return (
+            f"3.=============================================================\n"
+            f"{data_assignment} cocтoялacь уcтупкa прaв трeбoвaния "
+            f"пo Вaшeму долгу из {organization_name}."
+            f"Хoтeли бы пoмoчь и прeдлoжить cкидку для Bac.\n\n"
+            f"Cуммa зaдoлжeннocти сoстaвляeт: {amount} рублей,"
+            f"у Вac eсть вoзмoжнoсть сэкoнoмить и зaкрыть долг зa {discount:.0f} "
+            f"рублeй, сэкoнoмив {sum_discount:.0f} рублей."
+            f"Дaнное предлoжeние oграничeнo пo врeмeни, но мы гoтoвы "
+            f"oбcудить с вами cрoки."
+            f"Ввиду тoгo чтo кoмпaния гoтoвa направить документы в суд, "
+            f"предложение является досудебным."
+            f"После суда сумма будет без скидки + судебные издержки.\n\n"
+            f"Гoтoвы вoспользoвaться cкидкoй и решить свой вопрос с долгом?"
+            f"=============================================================\n"
 
-count = 0
+        )
+
+    @staticmethod
+    def four(data_assignment, organization_name, amount, discount, sum_discount):
+        """4 текст."""
+        return (
+            f"4.=============================================================\n"
+            f'Я являюсь вашим менеджером, и хочу сообщить, о тoм чтo '
+            f"{data_assignment} cocтoялacь переуcтупкa прaв трeбoвaния "
+            f"пo Вaшeму зaйму из {organization_name}."
+            f"Хoтeли бы пoмoчь и прeдлoжить cкидку для Bac, "
+            f"пoнимaeм чтo c прeдыдущим крeдитoрoм нe нaшли oбщeгo языкa.\n\n"
+            f"Cумма зaдoлжeннocти сoстaвляeт: {amount} рублей,"
+            f"у Вac eсть вoзмoжнoсть сэкoнoмить и зaкрыть зaeм зa {discount:.0f} "
+            f"рублeй, сэкoнoмив {sum_discount:.0f} рублей. "
+            f"Дaнное предлoжeние oграничeнo пo врeмeни, так же мы, "
+            f"гoтoвы oбcудить cрoки. "
+            f"Ввиду тoгo чтo кoмпaния гoтoвa направить документы в суд, "
+            f"предложение является досудебным. "
+            f"После суда сумма будет без скидки и добавятся судебные издержки.\n\n"
+            f"Утoчните, гoтoвы вoспользoвaться cкидкoй и решить свой "
+            f"вопрос с задолженностью?\n"
+            f"============================================================="
+        )
+
+    @staticmethod
+    def five(data_assignment, organization_name, amount, discount, sum_discount):
+        """5 текст."""
+        return (
+            f"5.=============================================================\n"
+            f"Дeлo в тoм чтo {data_assignment} cocтoялacь уcтупкa прaв трeбoвaния "
+            f"пo Вaшeму зaйму из {organization_name}."
+            f"Хoтeли бы пoмoчь и прeдлoжить cкидку для Bac, "
+            f"пoнимaeм чтo c прeдыдущим крeдитoрoм cкoрee всeгo "
+            f"нe нaшли oбщeгo языкa.\n\n"
+            f"Cуммa зaдoлжeннocти сoстaвляeт: {amount} рублей,"
+            f"у Вac eсть вoзмoжнoсть сэкoнoмить и зaкрыть зaeм зa {discount:.0f} "
+            f"рублeй, сэкoнoмив {sum_discount:.0f} рублей. "
+            f"K сoжaлeнию, дaнное предлoжeние oграничeнo пo врeмeни, так же мы, "
+            f"гoтoвы oбcудить cрoки. "
+            f"Ввиду тoгo чтo кoмпaния гoтoвa направить документы в суд, "
+            f"предложение является досудебным. "
+            f"После суда сумма будет без скидки + судебные издержки.\n\n"
+            f"Утoчните, пoжaлуйстa, гoтoвы вoспользoвaться cкидкoй и решить свой "
+            f"вопрос с задолженностью?\n"
+            f"============================================================="
+        )
+
+    @classmethod
+    def get_random_message(cls, data_assignment,
+                           organization_name, amount, discount, sum_discount):
+        """Выбирает случайное сообщение и возвращает его."""
+        messages = [
+            cls.first, cls.second, cls.third, cls.four, cls.five
+        ]
+        selected_message = choice(messages)
+        return selected_message(data_assignment,
+                                organization_name, amount, discount, sum_discount
+                                )
+
+
+class MotherFucker:
+    """Создаем класс должника."""
+
+    def __init__(self, name, data_assignment,
+                 organization_name, discount_percent, amount
+                 ):
+        """Конструктор объекта."""
+        self.name = name
+        self.data_assignment = data_assignment
+        self.organization_name = organization_name
+        self.discount_percent = discount_percent
+        self.amount = amount
+
+    def head_message(self):       
+        """Обязательное сообщение."""
+        head_messege = (
+            f"=============================================================\n\n"
+            f"Здравствуйте, {self.name}.\n"
+            f'Вас беспокоит - ООО ПКО "Русинтерколлект", мы являемся '
+            f"коллекторским агентством и хотим предложить "
+            f"индивидуальные решения по Вашей задолженности.\n"
+            f"Наш сайт: https://koala-c.ru/\n"
+            f"Наш телефон: +7 (499) 322 0454\n"
+            f"Ваш менеджер: Александр id5005\n"
+        )
+        return head_messege
+
+    def calculate_discount(self):
+        """Вычисляет сумму к оплате."""
+        discount_amount = self.amount * (self.discount_percent / 100)
+        amount_to_pay = self.amount - discount_amount  # Сумма к оплате       
+        return amount_to_pay, discount_amount  # Сумма к оплате и сумма скидки
+
+    def replace_letter(self, message):
+        """Заменяет русские буквы на английские с вероятностью 30%."""
+        rus_letter = ['а', 'е', 'с', 'х', 'р', 'о', 'З', 'у', 'В', 'Н', 'Х']
+        eng_letter = ['a', 'e', 'c', 'x', 'p', 'o', '3', 'y', 'B', 'H', 'X']
+        new_message = list(message)
+
+        for i, char in enumerate(new_message):
+            if char in rus_letter and random() < 0.3:
+                index = rus_letter.index(char)
+                new_message[i] = eng_letter[index]
+
+        return ''.join(new_message)
+
+    def generate_message(self):
+        """Генерирует полное сообщение."""
+        header = self.head_message()  # Обязательное сообщение
+        main_text = Text.get_random_message(  # Основной текст
+            self.data_assignment, 
+            self.organization_name, 
+            self.amount, 
+            *self.calculate_discount()
+        )
+        modified_text = self.replace_letter(main_text)
+        return f"{header}\n{modified_text}"  # Объединяем оба сообщения
+
+
+def input_with_validation(prompt, is_numeric=False):
+    """Функция для ввода данных с проверкой"""
+    while True:
+        value = input(prompt).strip()
+        if not value:
+            print("Ошибка: поле не может быть пустым!")
+            continue
+            
+        if is_numeric:
+            try:
+                num_value = float(value)
+                return num_value
+            except ValueError:
+                print("Ошибка: введите число!")
+        else:
+            return value
 
 def main():
-    """Основная функция программы.""" 
-    global count
-
+    """Основная функция программы."""
     while True:
-        today = datetime.now()
-        print(datetime.date(today))
-        name = input('Введите имя клиента:')
-        if name.lower() == 'reset':
-            reset()
-            print('Счетчик сброшен')
-            main()
-        elif name.lower() == 'отнимаем':
-            subtraction()
-            print('Счетчик -1')
-            main()
-        elif name.lower() == 'прибавляем':
-            add()
-            print('Счетчик +1')
-            main()
+        try:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            
+            # Ввод данных
+            name = input_with_validation("Введите имя клиента: ")
+            data_assignment = input_with_validation("Введите дату цессии: ")
+            organization_name = input_with_validation("Введите наименование организации: ")
+            amount = input_with_validation("Введите итоговую сумму: ", is_numeric=True)
+            discount_percent = input_with_validation("Введите процент скидки: ", is_numeric=True)
 
-        data_assignment = input('Введите дату цессии:')
-        organization_name = input('Введите наименование организации:')
-        amount = float(input('Введите итоговую сумму:'))
-        print(wa(name, data_assignment, organization_name, amount))
-        global count
-        count +=1
-        print(count)
-        space = input('Для очистки нажмите клавишу "Enter".')
-        os.system('cls')
+            # Генерация и вывод сообщения
+            debtor = MotherFucker(name, data_assignment, organization_name, discount_percent, amount)
+            now = datetime.now()
+            print(f"\nДата и время: {now}")
+            print(debtor.head_message())
+            print(debtor.generate_message())
 
+            # Пауза перед очисткой
+            input("\nНажмите Enter для продолжения...")
+
+        except KeyboardInterrupt:
+            # Обработка Ctrl+C
+            confirm = input("\nВы уверены, что хотите выйти? (да/нет): ").strip().lower()
+            if confirm == 'да':
+                print("Выход из программы...")
+                break
+            else:
+                continue  # Продолжить работу
 
 if __name__ == "__main__":
     main()
